@@ -1,13 +1,14 @@
 from maps import mapyy
 from pistart import l
+from math import sqrt
 
 global i, j, sx, ex, sr, se
 from pistart import pwm
 
 
-def mainloop(j, y, sx, ex, srange, erange, ups, ls, a, b):
+def mainloop(j, sx, ex, srange, erange, ups, ls, a, b):
     k2 = mapyy(j, sx, ex, srange, erange)
-    # y2 = -(10 * sqrt(1 - ((pow(k2, 2)) / 1600)))
+    y2 = -(10 * sqrt(1 - ((pow(k2, 2)) / 1600)))
     # put your y2 equation here
     te3, te4 = l.move(k2, y2)
     alpha = mapyy(te3, 0, 180, ups.sp, ups.ep)
