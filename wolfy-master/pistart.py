@@ -1,16 +1,13 @@
 import time
-
-from mainloop import mainloop
-import motion
+from mainloop import *
 from servo_calib import servo_cal
 
-# import Adafruit_PCA9685
+import Adafruit_PCA9685
 # import gpio as GPIO
 
 # GPIO.setmode(GPIO.BCM)
-# pwm = Adafruit_PCA9685.PCA9685()
-# pwm.set_pwm_freq(50)
-l = motion.leg(75, 100)
+pwm = Adafruit_PCA9685.PCA9685()
+pwm.set_pwm_freq(50)
 
 s1 = servo_cal(1, 550, 175)
 s2 = servo_cal(2, 510, 175)
@@ -21,7 +18,6 @@ s6 = servo_cal(6, 160, 540)
 s7 = servo_cal(7, 170, 525)
 s8 = servo_cal(8, 525, 170)
 
-
 def wolfxy(s, st_x, en_x, step):
     for i in range(s):
 
@@ -31,109 +27,155 @@ def wolfxy(s, st_x, en_x, step):
             ##########     leg1       ###########
             #####################################
             if j in range(31):
-                mainloop(j, 0, 30, -40, -20, s1, s2, 0, 1)
+                a1,b1=mainloop(j, 0, 30, -40, -20, s1, s2)
+                pwm.set_pwm(0, 0, int(a1))
+                pwm.set_pwm(1, 0, int(b1))
+                print("a1 {} and bi {}".format(a1,b1))
                 print('loop1')
                 #####################################
                 ##########     leg2       ###########
                 #####################################
-                mainloop(j, 0, 30, 5, 40, s3, s4, 2, 3)
+                a2,b2=mainloop(j, 0, 30, 5, 40, s3, s4)
+                pwm.set_pwm(2, 0, int(a2))
+                pwm.set_pwm(3, 0, int(b2))
+                print("a2 {} and b2 {}".format(a2, b2))
                 print('loop2')
                 #####################################
                 ##########     leg3       ###########
                 #####################################
 
-                mainloop(j, 0, 30, 40, -40, s5, s6, 4, 5)
+                a3,b3=mainloop(j, 0, 30, 40, -40, s5, s6)
+                pwm.set_pwm(4, 0, int(a3))
+                pwm.set_pwm(5, 0, int(b3))
+                print("a3 {} and b3 {}".format(a3, b3))
                 print('loop3')
 
                 #####################################
                 ##########     leg4       ###########
                 #####################################
 
-                mainloop(j, 0, 30, -20, 5, s7, s8, 6, 7)
+                a4,b4=mainloop(j, 0, 30, -20, 5, s7, s8)
+                pwm.set_pwm(6, 0, int(a4))
+                pwm.set_pwm(7, 0, int(b4))
+                print("a4 {} and b4 {}".format(a4, b4))
                 print('loop4')
-                time.sleep(0.005)
 
             elif j in range(31, 61):
                 #####################################
                 ##########     leg1       ###########
                 #####################################
 
-                mainloop(j, 31, 61, -20, 5, s1, s2, 0, 1)
+                a1,b1=mainloop(j, 31, 60, -20, 5, s1, s2)
                 print('loop11')
+                pwm.set_pwm(0, 0, int(a1))
+                pwm.set_pwm(1, 0, int(b1))
+                print("a1 {} and bi {}".format(a1, b1))
                 #####################################
                 ##########     leg2       ###########
                 #####################################
 
-                mainloop(j, 31, 61, 40, -40, s3, s4, 2, 3)
+                a2,b2=mainloop(j, 31, 61, 40, -40, s3, s4)
                 print('loop21')
+                pwm.set_pwm(2, 0, int(a2))
+                pwm.set_pwm(3, 0, int(b2))
+                print("a2 {} and b2 {}".format(a2, b2))
                 #####################################
                 ##########     leg3       ###########
                 #####################################
 
-                mainloop(j, 31, 61, -40, -20, s5, s6, 4, 5)
+                a3,b3=mainloop(j, 31, 61, -40, -20, s5, s6)
                 print('loop31')
+                pwm.set_pwm(4, 0, int(a3))
+                pwm.set_pwm(5, 0, int(b3))
+                print("a3 {} and b3 {}".format(a3, b3))
 
                 #####################################
                 ##########     leg4       ###########
                 #####################################
 
-                mainloop(j, 31, 61, 5, 40, s7, s8, 6, 7)
+                a4,b4 = mainloop(j, 31, 61, 5, 40, s7, s8)
                 print('loop41')
-                time.sleep(0.005)
+                pwm.set_pwm(6, 0, int(a4))
+                pwm.set_pwm(7, 0, int(b4))
+                print("a4 {} and b4 {}".format(a4, b4))
 
             elif j in range(61, 91):
                 #####################################
                 ##########     leg1       ###########
                 #####################################
 
-                mainloop(j, 61, 91, 5, 40, s1, s2, 0, 1)
+                a1,b1=mainloop(j, 61, 91, 5, 40, s1, s2)
                 print('loop51')
+                pwm.set_pwm(0, 0, int(a1))
+                pwm.set_pwm(1, 0, int(b1))
+                print("a1 {} and bi {}".format(a1, b1))
                 #####################################
                 ##########     leg2       ###########
                 #####################################
 
-                mainloop(j, 61, 91, -40, -20, s3, s4, 2, 3)
+                a2,b2=mainloop(j, 61, 91, -40, -20, s3, s4)
                 print('loop61')
+                pwm.set_pwm(2, 0, int(a2))
+                pwm.set_pwm(3, 0, int(b2))
+                print("a2 {} and b2 {}".format(a2, b2))
                 #####################################
                 ##########     leg3       ###########
                 #####################################
 
-                mainloop(j, 61, 91, -20, 5, s5, s6, 4, 5)
+                a3,b3=mainloop(j, 61, 91, -20, 5, s5, s6)
                 print('loop71')
+                pwm.set_pwm(4, 0, int(a3))
+                pwm.set_pwm(5, 0, int(b3))
+                print("a3 {} and b3 {}".format(a3, b3))
 
                 #####################################
                 ##########     leg4       ###########
                 #####################################
 
-                mainloop(j, 61, 91, 40, -40, s7, s8, 6, 7)
+                a4,b4=mainloop(j, 61, 91, 40, -40, s7, s8)
+                pwm.set_pwm(6, 0, int(a4))
+                pwm.set_pwm(7, 0, int(b4))
                 print('loop81')
-                time.sleep(0.005)
+                print("a4 {} and b4 {}".format(a4, b4))
+
             elif j in range(91, 121):
                 #####################################
                 ##########     leg1       ###########
                 #####################################
 
-                mainloop(j, 91, 121, 40, -40, s1, s2, 0, 1)
+                a1,b1=mainloop(j, 91, 121, 40, -40, s1, s2)
                 print('loop91')
+                pwm.set_pwm(0, 0, int(a1))
+                pwm.set_pwm(1, 0, int(b1))
+                print("a1 {} and bi {}".format(a1, b1))
                 #####################################
                 ##########     leg2       ###########
                 #####################################
 
-                mainloop(j, 91, 121, -20, 5, s3, s4, 2, 3)
+                a2,b2=mainloop(j, 91, 121, -20, 5, s3, s4)
                 print('loop101')
+                pwm.set_pwm(2, 0, int(a2))
+                pwm.set_pwm(3, 0, int(b2))
+                print("a2 {} and b2 {}".format(a2, b2))
                 #####################################
                 ##########     leg3       ###########
                 #####################################
 
-                mainloop(j, 91, 121, 5, 40, s5, s6, 4, 5)
+                a3,b3=mainloop(j, 91, 121, 5, 40, s5, s6)
                 print('loop111')
+                pwm.set_pwm(4, 0, int(a3))
+                pwm.set_pwm(5, 0, int(b3))
+                print("a3 {} and b3 {}".format(a1, b1))
                 #####################################
                 ##########     leg4       ###########
                 #####################################
 
-                mainloop(j, 91, 121, -40, -20, s7, s8, 6, 7)
+                a4,b4=mainloop(j, 91, 121, -40, -20, s7, s8)
                 print('loop121')
-                time.sleep(0.005)
+                pwm.set_pwm(6, 0, int(a4))
+                pwm.set_pwm(7, 0, int(b4))
+                print("a4 {} and b4 {}".format(a4, b4))
+
             else:
                 print("nothing works")
                 break
@@ -141,9 +183,7 @@ def wolfxy(s, st_x, en_x, step):
 
 if __name__ == "__main__":
     while (True):
-        print("walking forward")
         wolfxy(2, 0, 121, 1)
         time.sleep(1)
-        print("walking backward")
         wolfxy(2, 120, 0, -1)
         time.sleep(1)
