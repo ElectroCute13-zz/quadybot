@@ -2,7 +2,7 @@ from maps import translate
 from pistart import l
 
 global i, j, sx, ex, sr, se
-
+import time
 
 # from pistart import pwm
 

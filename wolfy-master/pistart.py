@@ -1,7 +1,7 @@
 import time
 
+from mainloop import mainloop
 import motion
-from mainloop import *
 from servo_calib import servo_cal
 
 # import Adafruit_PCA9685
@@ -51,13 +51,14 @@ def wolfxy(s, st_x, en_x, step):
 
                 mainloop(j, 0, 30, -20, 5, s7, s8, 6, 7)
                 print('loop4')
+                time.sleep(0.005)
 
             elif j in range(31, 61):
                 #####################################
                 ##########     leg1       ###########
                 #####################################
 
-                mainloop(j, 31, 60, -20, 5, s1, s2, 0, 1)
+                mainloop(j, 31, 61, -20, 5, s1, s2, 0, 1)
                 print('loop11')
                 #####################################
                 ##########     leg2       ###########
@@ -78,6 +79,7 @@ def wolfxy(s, st_x, en_x, step):
 
                 mainloop(j, 31, 61, 5, 40, s7, s8, 6, 7)
                 print('loop41')
+                time.sleep(0.005)
 
             elif j in range(61, 91):
                 #####################################
@@ -105,6 +107,7 @@ def wolfxy(s, st_x, en_x, step):
 
                 mainloop(j, 61, 91, 40, -40, s7, s8, 6, 7)
                 print('loop81')
+                time.sleep(0.005)
             elif j in range(91, 121):
                 #####################################
                 ##########     leg1       ###########
@@ -130,6 +133,7 @@ def wolfxy(s, st_x, en_x, step):
 
                 mainloop(j, 91, 121, -40, -20, s7, s8, 6, 7)
                 print('loop121')
+                time.sleep(0.005)
             else:
                 print("nothing works")
                 break
@@ -137,7 +141,9 @@ def wolfxy(s, st_x, en_x, step):
 
 if __name__ == "__main__":
     while (True):
+        print("walking forward")
         wolfxy(2, 0, 121, 1)
         time.sleep(1)
+        print("walking backward")
         wolfxy(2, 120, 0, -1)
         time.sleep(1)
